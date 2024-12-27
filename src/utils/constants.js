@@ -24,9 +24,4 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "spanish", name: "Spanish" },
 ];
 
-export const OPENAI_KEY =
-  "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";
-
-//process.env.REACT_APP_OPENAI_KEY;
-
-//  "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";
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
