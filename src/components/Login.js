@@ -7,7 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { USER_AVATAR } from "../utils/constants";
+import { BG_URL, USER_AVATAR } from "../utils/constants";
 
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
@@ -88,16 +88,13 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://images.reporteindigo.com/wp-content/uploads/2021/05/netflix-junio.jpg"
-          alt="logo"
-        />
+        <img src={BG_URL} alt="logo" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
         className="w-3/12 absolute p-10 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
       >
-        <h1 className="font-bold text-3xl py-2">
+        <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
