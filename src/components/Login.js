@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
 import {
@@ -8,14 +8,12 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { BG_URL, USER_AVATAR } from "../utils/constants";
-
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-
   const dispatch = useDispatch();
 
   const name = useRef(null);
@@ -40,7 +38,6 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            // photoURL: "https://cdn-icons-png.flaticon.com/512/6833/6833605.png",
             photoURL: USER_AVATAR,
           })
             .then(() => {
@@ -88,11 +85,17 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
+        {/* <p className="hidden md:inline-block py-6 text-lg w-1/4"> {overview}</p> */}
         <img src={BG_URL} alt="logo" />
+        <img
+          className="md:hidden h-screen object-cover"
+          src={BG_URL}
+          alt="logo"
+        />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-3/12 absolute p-10 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
+        className="w-full md:w-3/12 absolute p-10 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
       >
         <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}

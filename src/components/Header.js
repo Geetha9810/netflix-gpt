@@ -13,7 +13,13 @@ const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
-  const handleSignOut = () => {};
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {})
+      .catch((error) => {
+        navigate("/error");
+      });
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -46,10 +52,10 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute px-2 py-2 w-screen bg-gradient-to-b from-black z-10 flex justify-between ">
-      <img className="w-44" src={LOGO} alt="logo" />
+    <div className="absolute px-2 py-2 w-screen bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between  ">
+      <img className="w-44 mx-auto md:mx-0" src={LOGO} alt="logo" />
       {user && (
-        <div className="flex p-2 ">
+        <div className="flex p-2 justify-between ">
           {showGptSearch && (
             <select
               className="p-2 bg-gray-900 text-white"
@@ -68,7 +74,11 @@ const Header = () => {
           >
             {showGptSearch ? "Homepage" : "GPT Search"}
           </button>
-          <img className="w-10 h-10 " alt="usericon" src={user?.photoURL} />
+          <img
+            className="hidden md:block w-10 h-10 "
+            alt="usericon"
+            src={user?.photoURL}
+          />
           <button
             onClick={handleSignOut}
             className=" px-2 py-2 flex font-bold text-white"
