@@ -26,7 +26,7 @@ const GptSearchBar = () => {
     console.log(searchText.current.value);
 
     const gptQuery =
-      "Act as a Movie Recommendation system and suggest some movies for the query" +
+      "Act as a Movie Recommendation system and suggest some movies for the query :" +
       searchText.current.value +
       ".only give me names of 5 movies, comma separated like the example result given ahead. Example Result:Gaddar, Sholay,Don, Golmaal, Koi Mil Gaya";
 
@@ -37,8 +37,8 @@ const GptSearchBar = () => {
 
     if (!gptResults.choices) {
     }
-    console.log(gptResults.choices?.[0]?.message.content);
-    const gptMovies = gptResults.choices?.[0]?.message.content.split(",");
+    console.log(gptResults.choices?.[0]?.message?.content);
+    const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
 
     const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
 
@@ -55,6 +55,7 @@ const GptSearchBar = () => {
         onSubmit={(e) => e.preventDefault()}
       >
         <input
+          ref={searchText}
           type="text"
           className="p-4 m-4 col-span-9"
           placeholder={lang[langKey].gptSearchPlaceholder}
