@@ -32,7 +32,7 @@ const GptSearchBar = () => {
 
     const gptResults = await openai.chat.completions.create({
       messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-4o",
+      model: "gpt-3.5-turbo",
     });
 
     if (!gptResults.choices) {
@@ -48,6 +48,7 @@ const GptSearchBar = () => {
       addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
     );
   };
+
   return (
     <div className="pt-[35%] md:pt-[10%] flex justify-center">
       <form
@@ -61,7 +62,7 @@ const GptSearchBar = () => {
           placeholder={lang[langKey].gptSearchPlaceholder}
         />
         <button
-          className="col-span-3 m-4 py-2 px-4 bg-red-700 text-white rounded-lg "
+          className="col-span-3 m-4 py-2 px-2 bg-red-700 text-white rounded-lg "
           onClick={handleGptSearchClick}
         >
           {lang[langKey].search}
